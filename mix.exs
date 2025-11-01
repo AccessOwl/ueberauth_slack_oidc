@@ -9,7 +9,7 @@ defmodule UeberauthSlackOIDC.MixProject do
       version: @version,
       name: "Ueberauth Slack OIDC",
       package: package(),
-      elixir: "~> 1.8",
+      elixir: "~> 1.18",
       build_embedded: Mix.env() == :prod,
       start_permanent: Mix.env() == :prod,
       source_url: "https://github.com/AccessOwl/ueberauth_slack_oidc",
