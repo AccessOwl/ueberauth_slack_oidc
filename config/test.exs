@@ -6,8 +6,7 @@ config :ueberauth, Ueberauth,
     slack:
       {Ueberauth.Strategy.SlackOIDC,
        [
-         default_scope: "users:write",
-         default_user_scope: "dnd:write"
+         scope: "openid"
        ]}
   ]
 

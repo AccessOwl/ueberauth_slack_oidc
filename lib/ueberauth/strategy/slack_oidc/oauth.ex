@@ -1,6 +1,6 @@
 defmodule Ueberauth.Strategy.SlackOIDC.OAuth do
   @moduledoc """
-  An implementation of OAuth2 for Slack OAuth V2 API.
+  An implementation of OpenID Connect for Slack OAuth V2 API.
   To add your `client_id` and `client_secret` include these values in your configuration.
       config :ueberauth, Ueberauth.Strategy.SlackOIDC.OAuth,
         client_id: System.get_env("SLACK_CLIENT_ID"),
@@ -15,8 +15,8 @@ defmodule Ueberauth.Strategy.SlackOIDC.OAuth do
   @defaults [
     strategy: __MODULE__,
     site: "https://slack.com/api",
-    authorize_url: "https://slack.com/oauth/v2/authorize",
-    token_url: "https://slack.com/api/oauth.v2.access"
+    authorize_url: "https://slack.com/openid/connect/authorize",
+    token_url: "https://slack.com/api/openid.connect.token"
   ]
 
   def client(opts \\ []) do
@@ -61,13 +61,7 @@ defmodule Ueberauth.Strategy.SlackOIDC.OAuth do
 
     client = OAuth2.Client.get_token!(client(client_options), params, headers, options)
 
-    split_token(client.token)
-  end
-
-  defp split_token(nil), do: {nil, nil}
-
-  defp split_token(token) do
-    {token, OAuth2.AccessToken.new(token.other_params["authed_user"])}
+    client.token
   end
 
   # Strategy Callbacks

@@ -1,7 +1,7 @@
 [
   {
     "request": {
-      "url": "https://slack.com/api/oauth.v2.access?"
+      "url": "https://slack.com/api/openid.connect.token?"
     },
     "response": {
       "status_code": 200,
@@ -11,98 +11,38 @@
       "body": "{
         \"ok\": true,
         \"access_token\": \"xoxb-17653672481-19874698323-pdFZKVeTuE8sk7oOcBrzbqgy\",
-        \"token_type\": \"bot\",
-        \"scope\": \"commands,incoming-webhook\",
-        \"bot_user_id\": \"U0KRQLJ9H\",
-        \"app_id\": \"A0KRD7HC3\",
-        \"team\": {
-          \"name\": \"Slack Softball Team\",
-          \"id\": \"T9TK3CUKW\"
-    },
-        \"enterprise\": {
-          \"name\": \"slack-sports\",
-          \"id\": \"E12345678\"
+        \"token_type\": \"Bearer\",
+        \"id_token\": \"eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6Im1CMk1BeUtTbjU1NWlzZDBFYmRoS3g2bmt5QWk5eExxOHJ2Q0ViX25PeVkifQ.whatever\"
+    }"
+  }
+},
+{
+  "request": {
+    "url": "https://slack.com/api/openid.connect.userInfo?"
   },
-        \"authed_user\": {
-          \"id\": \"U1234\",
-          \"scope\": \"chat:write\",
-          \"access_token\": \"xoxp-1234\",
-          \"token_type\": \"user\"
-}
-}"
-}
-},
-{
-"request": {
-"url": "https://slack.com/api/auth.test?"
-},
-"response": {
-"status_code": 200,
-"headers": {
-"Authorization": "Bearer xoxp-1234",
-"Content-Type": "application/json"
-},
-"body": "{
+  "response": {
+    "status_code": 200,
+    "headers": {
+      "Authorization": "Bearer xoxp-1234",
+      "Content-Type": "application/json"
+    },
+    "body": "{
       \"ok\": true,
-      \"url\": \"https://subarachnoid.slack.com/\",
-      \"team\": \"Subarachnoid Workspace\",
-      \"user\": \"grace\",
-      \"team_id\": \"T12345678\",
-      \"user_id\": \"W12345678\"
-}"
-}
-},
-{
-"request": {
-"url": "https://slack.com/api/users.info?user=U01C8111111"
-},
-"response": {
-"status_code": 200,
-"headers": {
-"Authorization": "Bearer xoxb-594092027284-1416997157441-OuEZHfnFfupvVAH2zKxkIjsR",
-"Content-Type": "application/json"
-},
-"body": "{
-      \"ok\": true,
-      \"user\": {
-        \"id\": \"W012A3CDE\",
-        \"team_id\": \"T012AB3C4\",
-        \"name\": \"spengler\",
-        \"deleted\": false,
-        \"color\": \"9f69e7\",
-        \"real_name\": \"Egon Spengler\",
-        \"tz\": \"America/Los_Angeles\",
-        \"tz_label\": \"Pacific Daylight Time\",
-        \"tz_offset\": -25200,
-        \"profile\": {
-          \"avatar_hash\": \"ge3b51ca72de\",
-          \"status_text\": \"Print is dead\",
-          \"status_emoji\": \":books:\",
-          \"real_name\": \"Egon Spengler\",
-          \"display_name\": \"spengler\",
-          \"real_name_normalized\": \"Egon Spengler\",
-          \"display_name_normalized\": \"spengler\",
-          \"email\": \"spengler@ghostbusters.example.com\",
-          \"image_original\": \"https://.../avatar/e3b51ca72dee4ef87916ae2b9240df50.jpg\",
-          \"image_24\": \"https://.../avatar/e3b51ca72dee4ef87916ae2b9240df50.jpg\",
-          \"image_32\": \"https://.../avatar/e3b51ca72dee4ef87916ae2b9240df50.jpg\",
-          \"image_48\": \"https://.../avatar/e3b51ca72dee4ef87916ae2b9240df50.jpg\",
-          \"image_72\": \"https://.../avatar/e3b51ca72dee4ef87916ae2b9240df50.jpg\",
-          \"image_192\": \"https://.../avatar/e3b51ca72dee4ef87916ae2b9240df50.jpg\",
-          \"image_512\": \"https://.../avatar/e3b51ca72dee4ef87916ae2b9240df50.jpg\",
-          \"team\": \"T012AB3C4\"
-},
-        \"is_admin\": true,
-        \"is_owner\": false,
-        \"is_primary_owner\": false,
-        \"is_restricted\": false,
-        \"is_ultra_restricted\": false,
-        \"is_bot\": false,
-        \"updated\": 1502138686,
-        \"is_app_user\": false,
-        \"has_2fa\": false
-}
-}"
+      \"email\": \"krane@slack-corp.com\",
+      \"date_email_verified\": 1622128723,
+      \"given_name\": \"Grace\",
+      \"family_name\": \"Krane\",
+      \"name\": \"Grace Krane\",
+      \"picture\": \"https://.../avatar/e3b51ca72dee4ef87916ae2b9240df50.jpg\",
+      \"https://slack.com/user_id\": \"W12345678\",
+      \"https://slack.com/team_id\": \"T12345678\",
+      \"https://slack.com/team_domain\": \"subarachnoid\",
+      \"https://slack.com/team_name\": \"Subarachnoid Workspace\",
+      \"https://slack.com/user_image_1024\": \"https://avatars.slack-edge.com/2021-09-28/123_1024.jpg\",
+      \"https://slack.com/user_image_512\": \"https://avatars.slack-edge.com/2021-09-28/123_512.jpg\",
+      \"https://slack.com/team_image_1024\": \"https://avatars.slack-edge.com/2021-09-28/123_1024.jpg\",
+      \"https://slack.com/team_image_512\": \"https://avatars.slack-edge.com/2021-09-28/123_512.jpg\"
+  }"
 }
 }
 ]

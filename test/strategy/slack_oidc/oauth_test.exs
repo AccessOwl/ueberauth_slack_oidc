@@ -12,8 +12,8 @@ defmodule Ueberauth.Strategy.SlackOIDC.OAuthTest do
     assert client.client_secret == "clientsecret-somethingsecret"
     assert client.redirect_uri == ""
     assert client.strategy == Ueberauth.Strategy.SlackOIDC.OAuth
-    assert client.authorize_url == "https://slack.com/oauth/v2/authorize"
-    assert client.token_url == "https://slack.com/api/oauth.v2.access"
+    assert client.authorize_url == "https://slack.com/openid/connect/authorize"
+    assert client.token_url == "https://slack.com/api/openid.connect.token"
     assert client.site == "https://slack.com/api"
   end
 end

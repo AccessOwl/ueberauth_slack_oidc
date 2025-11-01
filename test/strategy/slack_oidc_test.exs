@@ -5,6 +5,9 @@ defmodule Ueberauth.Strategy.SlackOIDCTest do
 
   @router SpecRouter.init([])
 
+  @external_resource "test/support/fixtures/slack_oidc_response_basic.html"
+  @external_resource "test/support/fixtures/slack_oidc_response_advanced.html"
+
   doctest Ueberauth.Strategy.SlackOIDC
 
   setup do
@@ -39,7 +42,7 @@ defmodule Ueberauth.Strategy.SlackOIDCTest do
     conn =
       :get
       |> conn(
-        "/auth/slack?scope=users:read&user_scope=dnd:write" <>
+        "/auth/slack?scope=openid" <>
           "&state=obscure_custom_value&unknown_param=should_be_ignored"
       )
       |> SpecRouter.call(@router)
