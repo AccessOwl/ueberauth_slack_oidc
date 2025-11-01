@@ -1,11 +1,11 @@
-defmodule Ueberauth.Strategy.SlackV2Test do
+defmodule Ueberauth.Strategy.SlackOIDCTest do
   use ExUnit.Case, async: true
   use Plug.Test
   use ExVCR.Mock, adapter: ExVCR.Adapter.Hackney
 
   @router SpecRouter.init([])
 
-  doctest Ueberauth.Strategy.SlackV2
+  doctest Ueberauth.Strategy.SlackOIDC
 
   setup do
     ExVCR.Config.cassette_library_dir(
@@ -18,7 +18,7 @@ defmodule Ueberauth.Strategy.SlackV2Test do
 
   test "simple request phase" do
     {:ok, response_basic} =
-      "test/support/fixtures/slack_v2_response_basic.html"
+      "test/support/fixtures/slack_oidc_response_basic.html"
       |> Path.expand()
       |> File.read()
 
@@ -32,7 +32,7 @@ defmodule Ueberauth.Strategy.SlackV2Test do
 
   test "advanced request phase" do
     {:ok, response_advanced} =
-      "test/support/fixtures/slack_v2_response_advanced.html"
+      "test/support/fixtures/slack_oidc_response_advanced.html"
       |> Path.expand()
       |> File.read()
 
@@ -50,7 +50,7 @@ defmodule Ueberauth.Strategy.SlackV2Test do
   test "default callback phase" do
     query = %{code: "code_abc"} |> URI.encode_query()
 
-    use_cassette "slack-v2-responses", custom: true do
+    use_cassette "slack-oidc-responses", custom: true do
       conn =
         :get
         |> conn("/auth/slack/callback?#{query}")
@@ -61,7 +61,7 @@ defmodule Ueberauth.Strategy.SlackV2Test do
       auth = conn.assigns.ueberauth_auth
 
       assert auth.provider == :slack
-      assert auth.strategy == Ueberauth.Strategy.SlackV2
+      assert auth.strategy == Ueberauth.Strategy.SlackOIDC
     end
   end
 end

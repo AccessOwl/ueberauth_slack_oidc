@@ -4,7 +4,7 @@ config :ueberauth, Ueberauth,
   json_library: Jason,
   providers: [
     slack:
-      {Ueberauth.Strategy.SlackV2,
+      {Ueberauth.Strategy.SlackOIDC,
        [
          default_scope: "users:write",
          default_user_scope: "dnd:write"
@@ -13,7 +13,7 @@ config :ueberauth, Ueberauth,
 
 config :oauth2, adapter: Tesla.Adapter.Hackney
 
-config :ueberauth, Ueberauth.Strategy.SlackV2.OAuth,
+config :ueberauth, Ueberauth.Strategy.SlackOIDC.OAuth,
   client_id: "clientidsomethingrandom",
   client_secret: "clientsecret-somethingsecret"
 

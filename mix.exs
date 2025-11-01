@@ -1,20 +1,20 @@
-defmodule UeberauthSlackV2.MixProject do
+defmodule UeberauthSlackOIDC.MixProject do
   use Mix.Project
 
-  @version "2.0.1"
+  @version "1.0.0"
 
   def project do
     [
-      app: :ueberauth_slack_v2,
+      app: :ueberauth_slack_oidc,
       version: @version,
-      name: "Ueberauth Slack V2",
+      name: "Ueberauth Slack OIDC",
       package: package(),
       elixir: "~> 1.8",
       build_embedded: Mix.env() == :prod,
       start_permanent: Mix.env() == :prod,
-      source_url: "https://github.com/jsmestad/ueberauth_slack_v2",
-      homepage_url: "https://github.com/jsmestad/ueberauth_slack_v2",
-      description: "An Ueberauth strategy for using Slack OAuth V2 to authenticate your users",
+      source_url: "https://github.com/AccessOwl/ueberauth_slack_oidc",
+      homepage_url: "https://github.com/AccessOwl/ueberauth_slack_oidc",
+      description: "Slack OIDC Überauth strategy",
       deps: deps(),
       docs: docs()
     ]
@@ -37,6 +37,7 @@ defmodule UeberauthSlackV2.MixProject do
       {:earmark, "~> 1.3", only: :dev},
       {:ex_doc, "~> 0.21", only: :dev},
       {:exvcr, "~> 0.11", only: :test},
+      {:mix_test_watch, "~> 1.0", only: [:dev, :test], runtime: false},
       {:hackney, "~> 1.18", only: [:dev, :test]}
     ]
   end
@@ -45,8 +46,8 @@ defmodule UeberauthSlackV2.MixProject do
     [
       source_ref: "v#{@version}",
       main: "README",
-      canonical: "http://hexdocs.pm/ueberauth_slack_v2",
-      source_url: "https://github.com/jsmestad/ueberauth_slack_v2",
+      canonical: "http://hexdocs.pm/ueberauth_slack_oidc",
+      source_url: "https://github.com/AccessOwl/ueberauth_slack_oidc",
       extras: [
         "README.md": [filename: "README"],
         "CHANGELOG.md": [filename: "CHANGELOG"]
@@ -57,9 +58,9 @@ defmodule UeberauthSlackV2.MixProject do
   defp package do
     [
       files: ~w(lib LICENSE mix.exs README.md),
-      maintainers: ["Justin Smestad"],
+      maintainers: ["Mathias Nestler"],
       licenses: ["MIT"],
-      links: %{github: "https://github.com/jsmestad/ueberauth_slack_v2"}
+      links: %{github: "https://github.com/AccessOwl/ueberauth_slack_oidc"}
     ]
   end
 end

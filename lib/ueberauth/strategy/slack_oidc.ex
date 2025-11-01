@@ -1,19 +1,19 @@
-defmodule Ueberauth.Strategy.SlackV2 do
+defmodule Ueberauth.Strategy.SlackOIDC do
   @moduledoc """
-  Implements an ÜeberauthSlack strategy for authentication with Slack V2 OAuth API.
+  Implements an ÜeberauthSlack strategy for authentication with Slack OpenID Connect API.
 
   When configuring the strategy in the Üeberauth providers, you can specify some defaults.
 
   * `uid_field` - The field to use as the UID field. This can be any populated field in the info struct. Default `:email`
   * `default_scope` - The scope to request by default from slack (permissions). Default "users:read"
   * `default_users_scope` - The scope to request by default from slack (permissions). Default "users:read"
-  * `oauth2_module` - The OAuth2 module to use. Default Ueberauth.Strategy.SlackV2.OAuth
+  * `oauth2_module` - The OAuth2 module to use. Default Ueberauth.Strategy.SlackOIDC.OAuth
 
   ```elixir
 
   config :ueberauth, Ueberauth,
     providers: [
-      slack: { Ueberauth.Strategy.SlackV2, [uid_field: :nickname, default_scope: "users:read,users:write"] }
+      slack: { Ueberauth.Strategy.SlackOIDC, [uid_field: :nickname, default_scope: "users:read,users:write"] }
     ]
   ```
   """
@@ -21,7 +21,7 @@ defmodule Ueberauth.Strategy.SlackV2 do
     uid_field: :email,
     default_scope: "users:read",
     default_user_scope: "",
-    oauth2_module: Ueberauth.Strategy.SlackV2.OAuth,
+    oauth2_module: Ueberauth.Strategy.SlackOIDC.OAuth,
     ignores_csrf_attack: true
 
   alias Ueberauth.Auth.Info
@@ -228,7 +228,7 @@ defmodule Ueberauth.Strategy.SlackV2 do
     scope_string = token.other_params["scope"] || ""
     scopes = String.split(scope_string, ",")
 
-    case Ueberauth.Strategy.SlackV2.OAuth.get(token, "/auth.test") do
+    case Ueberauth.Strategy.SlackOIDC.OAuth.get(token, "/auth.test") do
       {:ok, %OAuth2.Response{status_code: 401, body: _body}} ->
         set_errors!(conn, [error("token", "unauthorized")])
 
@@ -264,7 +264,7 @@ defmodule Ueberauth.Strategy.SlackV2 do
         conn
 
       true ->
-        case Ueberauth.Strategy.SlackV2.OAuth.get(token, "/users.identity") do
+        case Ueberauth.Strategy.SlackOIDC.OAuth.get(token, "/users.identity") do
           {:ok, %OAuth2.Response{status_code: 401, body: _body}} ->
             set_errors!(conn, [error("token", "unauthorized")])
 
@@ -298,7 +298,7 @@ defmodule Ueberauth.Strategy.SlackV2 do
       true ->
         auth = conn.private.slack_auth
 
-        case Ueberauth.Strategy.SlackV2.OAuth.get(token, "/users.info", %{user: auth["user_id"]}) do
+        case Ueberauth.Strategy.SlackOIDC.OAuth.get(token, "/users.info", %{user: auth["user_id"]}) do
           {:ok, %OAuth2.Response{status_code: 401, body: _body}} ->
             set_errors!(conn, [error("token", "unauthorized")])
 
@@ -327,7 +327,7 @@ defmodule Ueberauth.Strategy.SlackV2 do
         conn
 
       true ->
-        case Ueberauth.Strategy.SlackV2.OAuth.get(token, "/team.info") do
+        case Ueberauth.Strategy.SlackOIDC.OAuth.get(token, "/team.info") do
           {:ok, %OAuth2.Response{status_code: 401, body: _body}} ->
             set_errors!(conn, [error("token", "unauthorized")])
 

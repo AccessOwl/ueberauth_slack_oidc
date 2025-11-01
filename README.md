@@ -1,16 +1,16 @@
-# Überauth Slack V2
+# Überauth Slack OIDC
 
-> Slack V2 OAuth2 strategy for Überauth.
+> Slack OIDC strategy for Überauth.
 
 ## Installation
 
 1. Setup your application at [Slack API](https://api.slack.com).
 
-1. Add `:ueberauth_slack` to your list of dependencies in `mix.exs`:
+1. Add `:ueberauth_slack_oidc` to your list of dependencies in `mix.exs`:
 
     ```elixir
     def deps do
-      [{:ueberauth_slack_v2, "~> 2.0"}]
+      [{:ueberauth_slack_oidc, "~> 1.0"}]
     end
     ```
 
@@ -19,7 +19,7 @@
     ```elixir
     config :ueberauth, Ueberauth,
       providers: [
-        slack: {Ueberauth.Strategy.SlackV2, []}
+        slack: {Ueberauth.Strategy.SlackOIDC, []}
       ]
     ```
 
@@ -28,14 +28,14 @@
     ```elixir
     config :ueberauth, Ueberauth,
       providers: [
-        slack: {Ueberauth.Strategy.SlackV2, [team: "0ABCDEF"]}
+        slack: {Ueberauth.Strategy.SlackOIDC, [team: "0ABCDEF"]}
       ]
     ```
 
 1.  Update your provider configuration:
 
     ```elixir
-    config :ueberauth, Ueberauth.Strategy.SlackV2.OAuth,
+    config :ueberauth, Ueberauth.Strategy.SlackOIDC.OAuth,
       client_id: System.get_env("SLACK_CLIENT_ID"),
       client_secret: System.get_env("SLACK_CLIENT_SECRET")
     ```
@@ -80,7 +80,7 @@ By default the requested scope is "users:read". Scope can be configured either e
 ```elixir
 config :ueberauth, Ueberauth,
   providers: [
-    slack: {Ueberauth.Strategy.SlackV2, [
+    slack: {Ueberauth.Strategy.SlackOIDC, [
       default_scope: "users:read,users:write",
       default_user_scope: "dnd:write"
     ]}
