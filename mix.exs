@@ -1,7 +1,7 @@
 defmodule UeberauthSlackOIDC.MixProject do
   use Mix.Project
 
-  @version "1.0.0"
+  @version "1.1.0"
 
   def project do
     [
@@ -60,7 +60,10 @@ defmodule UeberauthSlackOIDC.MixProject do
       files: ~w(lib LICENSE mix.exs README.md),
       maintainers: ["Mathias Nestler"],
       licenses: ["MIT"],
-      links: %{github: "https://github.com/AccessOwl/ueberauth_slack_oidc"}
+      links: %{
+        github: "https://github.com/AccessOwl/ueberauth_slack_oidc",
+        changelog: "https://github.com/AccessOwl/ueberauth_slack_oidc/blob/main/CHANGELOG.md"
+      }
     ]
   end
 end
