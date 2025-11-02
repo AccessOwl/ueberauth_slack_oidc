@@ -1,7 +1,6 @@
 import Config
 
 config :ueberauth, Ueberauth,
-  json_library: Jason,
   providers: [
     slack:
       {Ueberauth.Strategy.SlackOIDC,

@@ -19,8 +19,7 @@ defmodule Ueberauth.Strategy.SlackOIDC do
   use Ueberauth.Strategy,
     uid_field: :email,
     scope: "openid",
-    oauth2_module: Ueberauth.Strategy.SlackOIDC.OAuth,
-    ignores_csrf_attack: true
+    oauth2_module: Ueberauth.Strategy.SlackOIDC.OAuth
 
   alias Ueberauth.Auth.Info
   alias Ueberauth.Auth.Credentials
@@ -33,7 +32,11 @@ defmodule Ueberauth.Strategy.SlackOIDC do
     opts = [scope: scopes]
 
     opts =
-      if conn.params["state"], do: Keyword.put(opts, :state, conn.params["state"]), else: opts
+      if conn.params["state"] do
+        Keyword.put(opts, :state, conn.params["state"])
+      else
+        with_state_param(opts, conn)
+      end
 
     team = option(conn, :team)
     opts = if team, do: Keyword.put(opts, :team, team), else: opts
